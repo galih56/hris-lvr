@@ -22,4 +22,9 @@
     <body>
         <div id="app"></div>
     </body>
+    @if (!Auth::check())
+        <script>
+            localStorage.clear();
+        </script>
+    @endif
 </html>
