@@ -22,9 +22,11 @@
     <body>
         <div id="app"></div>
     </body>
+    
     @if (!Auth::check())
         <script>
             localStorage.clear();
+            window.location.href = '/auth';  // Redirect to login page
         </script>
     @endif
 </html>

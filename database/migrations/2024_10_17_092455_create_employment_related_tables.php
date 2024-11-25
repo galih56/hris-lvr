@@ -14,16 +14,16 @@ return new class extends Migration
         // Employment Status Table
         Schema::create('employment_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code');
-            $table->string('name');
+            $table->string('code',50);
+            $table->string('name',100);
             $table->timestamps();
         });
 
         // Cost Centers Table
         Schema::create('cost_centers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code');
-            $table->string('name');
+            $table->string('code',50);
+            $table->string('name',100);
             $table->timestamps();
         });
 
@@ -38,15 +38,15 @@ return new class extends Migration
         // Job Positions Table
         Schema::create('job_positions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 255);
-            $table->string('code', 100);
+            $table->string('name', 100);
+            $table->string('code', 50);
             $table->string('job_status', 100)->nullable();
             $table->string('cost_center', 100)->nullable();
             $table->string('job_grade', 100)->nullable();
             $table->string('work_location', 100)->nullable();
             $table->string('organization_unit', 100)->nullable();
             $table->text('job_description')->nullable();
-            $table->string('status', 50)->nullable();
+            $table->enum('status', ['active', 'inactive'])->nullable(); 
             $table->timestamps();
         });
 
@@ -78,15 +78,15 @@ return new class extends Migration
         // organization Units Table
         Schema::create('organization_units', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code');
-            $table->string('name');
+            $table->string('code',50);
+            $table->string('name',100);
             $table->timestamps();
         });
 
         // Religions Table
         Schema::create('religions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 255);
+            $table->string('name', 50);
             $table->timestamps();
         });
 
@@ -100,7 +100,7 @@ return new class extends Migration
         // Create terminate_types table
         Schema::create('terminate_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name',50);
             $table->timestamps(); // This will create created_at and updated_at columns
         });
 
@@ -112,7 +112,7 @@ return new class extends Migration
             $table->timestamps(); 
 
             // Foreign key constraint
-            $table->foreign('type_id')->references('id')->on('terminate_types')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('terminate_types');
         });
     }
 

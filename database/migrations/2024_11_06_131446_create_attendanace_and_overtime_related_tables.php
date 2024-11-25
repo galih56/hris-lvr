@@ -83,7 +83,7 @@ return new class extends Migration
                 $table->string('code', 50);
         
                 $table->unsignedBigInteger('attendance_id');
-                $table->foreign('attendance_id')->references('id')->on('attendances')->onDelete('cascade'); // Reference to the attendance record
+                $table->foreign('attendance_id')->references('id')->on('attendances'); // Reference to the attendance record
         
                 $table->unsignedBigInteger('employee_id');
                 $table->foreign('employee_id')->references('id')->on('employees');
@@ -104,16 +104,17 @@ return new class extends Migration
             Schema::create('attendance_corrections', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('attendance_id');
-                $table->foreign('attendance_id')->references('id')->on('attendances')->onDelete('cascade');
+                $table->foreign('attendance_id')->references('id')->on('attendances');
                 $table->unsignedBigInteger('request_id');
-                $table->foreign('request_id')->references('id')->on('attendance_correction_requests')->onDelete('cascade');
+                $table->foreign('request_id')->references('id')->on('attendance_correction_requests');
         
                 $table->datetime('corrected_check_in')->nullable();
                 $table->datetime('corrected_check_out')->nullable();
                 $table->double('corrected_hours_worked')->nullable();
                 $table->text('notes')->nullable();
         
-                $table->unsignedBigInteger('approved_by')->nullable(); // HR or manager who approved the correction
+                $table->unsignedBigInteger('approved_by')->nullable();
+                $table->foreign('approved_by')->references('id')->on('users');
                 $table->timestamps();
             });
         }
@@ -132,6 +133,8 @@ return new class extends Migration
                 $table->datetime('end');
 
                 $table->enum('status', ['active', 'inactive', 'completed'])->nullable(); 
+                $table->unsignedBigInteger('approved_by')->nullable();
+                $table->foreign('approved_by')->references('id')->on('users');
                 $table->timestamps();
 
             });
@@ -152,6 +155,8 @@ return new class extends Migration
                 $table->datetime('end');
 
                 $table->enum('status', ['active', 'inactive', 'completed'])->nullable(); 
+                $table->unsignedBigInteger('approved_by')->nullable();
+                $table->foreign('approved_by')->references('id')->on('users');
                 $table->timestamps();
             });
         }

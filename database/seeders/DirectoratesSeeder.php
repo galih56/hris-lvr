@@ -15,7 +15,8 @@ class DirectoratesSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('directorates')->insert([
+        
+        $directorates = [
             ['id' => 1, 'name' => 'CEO OFFICE', 'code' => 'CEO' ],
             ['id' => 2, 'name' => 'Human Capital', 'code' => 'HC'],
             ['id' => 3, 'name' => 'Internal Audit', 'code' => 'IA'],
@@ -30,6 +31,15 @@ class DirectoratesSeeder extends Seeder
             ['id' => 13, 'name' => 'License & Regional Development', 'code' => 'LRD' ],
             ['id' => 14, 'name' => 'Strategic Planning', 'code' => 'SPG'],
             ['id' => 15, 'name' => 'Technical & Project', 'code' => 'TEP' ],
-        ]);
+        ];
+	
+        for ($i=0; $i < count($directorates); $i++) { 
+            $item = $directorates[$i];
+            $directorateExists = DB::table('directorates')->where('code',$item['code'])->first();
+            
+            if (!$directorateExists) {
+                DB::table('directorates')->insert($item);
+            }
+        }
     }
 }

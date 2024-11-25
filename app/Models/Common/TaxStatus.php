@@ -4,20 +4,15 @@ namespace App\Models\Common;
 
 use Illuminate\Database\Eloquent\Model;
 
-class JobPosition extends Model
+class TaxStatus extends Model
 {
-    protected $table = 'job_positions';
+    protected $table = 'tax_statuses';
     public $timestamps = true;
 
 
     protected $fillable = [
         'code',
         'name',
-        'status',
-        'cost_center_id',
-        'job_grade_id',
-        'work_location_id',
-        'organization_unit_id'
     ];
 
     /**
@@ -27,6 +22,6 @@ class JobPosition extends Model
      */
     public function employees(): HasMany
     {
-        return $this->hasMany(Employee::class, 'job_position_id');
+        return $this->hasMany(Employee::class, 'tax_status_id');
     }
 }

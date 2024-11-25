@@ -54,7 +54,7 @@ const loginWithEmailAndPassword = async (data: LoginInput): Promise<AuthResponse
       const auth = { user, accessToken, tokenType, authenticated: true };
       setAuth(auth);
     }
-    console.log(response)
+    
     return response;  
   } catch (error) {
     throw error;
@@ -89,11 +89,11 @@ const authConfig = {
   userFn: getUser,
   loginFn: async (data: LoginInput) => {
     const response = await loginWithEmailAndPassword(data);
-    return response.user;
+    return response.data;
   },
   registerFn: async (data: RegisterInput) => {
     const response = await registerWithEmailAndPassword(data);
-    return response.user;
+    return response.data;
   },
   logoutFn: logout,
 };

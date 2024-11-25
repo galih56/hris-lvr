@@ -14,5 +14,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/hris/{any?}', [WebController::class, 'hrisApp'])->where('any', '.*')->name('hris');
     });
 });
-
+Route::get('/import-test',[WebController::class , 'import_test']);
+Route::post('/job_positions_import',[WebController::class , 'jobPositionsImport'])->name('job_positions.import');
+Route::post('/employees_import',[WebController::class , 'employeesImport'])->name('employees.import');
 Route::get('/{any?}', [WebController::class, 'index']);

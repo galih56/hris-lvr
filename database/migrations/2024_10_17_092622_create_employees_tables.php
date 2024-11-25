@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code', 200);
-            $table->string('name', 250);
-            $table->string('email', 150)->nullable();
+            $table->string('code', 50);
+            $table->string('name', 100);
+            $table->string('email', 50)->nullable();
             $table->string('address', 200)->nullable();
-            $table->string('state', 100)->nullable();
-            $table->string('city', 100)->nullable();
+            $table->string('state', 50)->nullable();
+            $table->string('city', 50)->nullable();
             $table->string('district', 100)->nullable();
-            $table->string('birth_place', 200)->nullable();
+            $table->string('birth_place', 100)->nullable();
             $table->dateTime('birth_date')->nullable();
-            $table->string('id_number', 200)->nullable();
+            $table->string('id_number', 100)->nullable();
             $table->integer('gender')->nullable();
             $table->dateTime('join_date');
             $table->dateTime('employment_start_date')->nullable();
@@ -46,6 +46,7 @@ return new class extends Migration
             $table->unsignedBigInteger('job_position_id');
             $table->unsignedBigInteger('outsource_vendor_id')->nullable();
 
+            $table->foreign('tax_status_id')->references('id')->on('employees');
             $table->foreign('religion_id')->references('id')->on('religions');
             $table->foreign('terminate_reason_id')->references('id')->on('terminate_reasons');
             $table->foreign('work_location_id')->references('id')->on('work_locations');

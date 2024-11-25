@@ -3,6 +3,7 @@ import { LoaderFunctionArgs } from 'react-router-dom';
 
 import { getEmployeesQueryOptions } from '@/features/employees/api/get-employees';
 import { EmployeesList } from '@/features/employees/components/employees-list';
+import { CreateEmployee } from '@/features/employees/components/create-employee';
 
 export const employeesLoader =
   (queryClient: QueryClient) =>
@@ -24,7 +25,12 @@ export const EmployeesRoute = () => {
   return (
     <>
       <div className="mt-4">
-        <EmployeesList />
+        <div className='w-full'>
+          <CreateEmployee/>
+        </div>
+        <div className='w-full'>
+          <EmployeesList />          
+        </div>
       </div>
     </>
   );

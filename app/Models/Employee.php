@@ -29,7 +29,7 @@ class Employee extends Model
         'bank_branch',
         'bank_account',
         'marital_status',
-        'status',
+        'status', 
         'insurance_number',
         'tax_number',
 

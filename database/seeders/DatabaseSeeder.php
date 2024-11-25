@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            AdminUserSeeder::class,
+            // AdminUserSeeder::class,
             // DirectoratesSeeder::class,
             // EmploymentStatusSeeder::class,
             // JobPositionSeeder::class,
@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             // JobGradeSeeder::class,
             // JobPositionSeeder::class,
             // TaxStatusSeeder::class,
-            // WorkLocationSeeder::class,
+            WorkLocationSeeder::class,
             // TerminateReasonSeeder::class,
             // OutsourceVendorSeeder::class,
             // EmployeesSeeder::class,

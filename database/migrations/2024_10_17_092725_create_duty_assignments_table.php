@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('duty_assignments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code',200);
+            $table->string('code',50);
 
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('job_position_id');

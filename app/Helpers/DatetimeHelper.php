@@ -2,24 +2,37 @@
 namespace App\Helpers;
 use Carbon\Carbon;
 
-class DatetimeHelper {
-    public function convertToCarbon($date)
-    {
-        $formats = ['d-m-Y H:i:s', 'd-m-Y', 'd-m-Y H:i'];
+class DatetimeHelper {function createDateTimeObject($datetimeString, $formats = [
+    'd/m/Y',
+    'd/m/Y H,i,s',
+    'd.m.Y',
+    'd/m/Y H:i:s',
+    'd/m/Y H.i.s',
+    'd-m-Y H:i:s',
+    'Y-m-d H:i:s',
+    'Y-m-d H.i.s',
+    'm/d/Y g:i:s A P',
+    'Y-m-d',
+    'd-m-Y',
+    'd-M-Y'
+]) {
+    foreach ($formats as $format) {
+        try {
+            $dateTime = Carbon::createFromFormat($format, $datetimeString);
 
-        foreach ($formats as $format) {
-            $parsed = $date;
-            try {
-                $parsed = Carbon::createFromFormat($format, $date);
-            } catch (\Throwable $th) {
-                $parsed = $date;
+            if ($dateTime !== false) {
+                // Ensure no parse errors occurred
+                if ($dateTime->format($format) === $datetimeString) {
+                    return $dateTime;
+                }
             }
-
-            if ($parsed && !is_string($parsed) && $parsed->format($format) === $date) {
-                return $parsed->toDateTimeString();
-            }
+        } catch (\Exception $e) {
+            // Skip invalid formats
+            continue;
         }
-
-        return null;
     }
+
+    return false; // Return false if no format matches
+}
+
 }

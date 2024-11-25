@@ -81,8 +81,56 @@ class EmployeeController extends Controller
         
         return ApiResponse::sendResponse('Employee Delete Successful','',204);
     }
-    
+
     public function checkEmployeeName($search){
 
+    }
+
+    public function getMaritalStatuses(){
+        $data = $this->employeeRepositoryInterface->getMaritalStatuses();
+
+        return ApiResponse::sendResponse($data,'','success', 200);
+    }
+
+    public function getReligions(){
+        $data = $this->employeeRepositoryInterface->getReligions();
+
+        return ApiResponse::sendResponse($data,'','success', 200);
+    }
+
+    public function getDirectorates(){
+        $data = $this->employeeRepositoryInterface->getDirectorates();
+
+        return ApiResponse::sendResponse($data,'','success', 200);
+    }
+
+    public function getJobPositions(){
+        $data = $this->employeeRepositoryInterface->getJobPositions();
+
+        return ApiResponse::sendResponse($data,'','success', 200);
+    }
+    
+    public function getJobGrades(){
+        $data = $this->employeeRepositoryInterface->getJobGrades();
+
+        return ApiResponse::sendResponse($data,'','success', 200);
+    }
+    
+    public function getWorkLocations(){
+        $data = $this->employeeRepositoryInterface->getWorkLocations();
+
+        return ApiResponse::sendResponse($data,'','success', 200);
+    }
+
+    public function getEmploymentStatuses(){
+        $data = $this->employeeRepositoryInterface->getEmploymentStatuses();
+
+        return ApiResponse::sendResponse($data,'','success', 200);
+    }
+
+    public function getOrganizationUnits(){
+        $data = $this->employeeRepositoryInterface->getOrganizationUnits();
+
+        return ApiResponse::sendResponse($data,'','success', 200);
     }
 }

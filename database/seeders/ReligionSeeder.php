@@ -25,11 +25,11 @@ class ReligionSeeder extends Seeder
         
         
         for ($i=0; $i < count($religions); $i++) { 
-            $item = $religions[$i];
-            $religionExists = \DB::table('religions')->like('name',$item['name'])->first();
+            $religion = $religions[$i];
+            $religionExists = \DB::table('religions')->where('name',$religion['name'])->first();
             
             if (!$religionExists) {
-                \DB::table('religions')->insert($item[$i]);
+                \DB::table('religions')->insert($religion);
             }
         }
     }

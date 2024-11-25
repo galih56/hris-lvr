@@ -20,10 +20,10 @@ class TerminateReasonSeeder extends Seeder
         ];
         for ($i=0; $i < count($terminate_reasons); $i++) { 
             $terminate_reason = $terminate_reasons[$i];
-            $terminateReasonExists = DB::table('terminate_reasons')->where('name',$terminate_reason['name'])->first();
+            $terminateReasonExists = \DB::table('terminate_reasons')->where('name',$terminate_reason['name'])->first();
     
             if (!$terminateReasonExists) {
-                DB::table('terminate_reasons')->insert([
+                \DB::table('terminate_reasons')->insert([
                     'name' => $terminate_reason['name'],
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),

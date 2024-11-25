@@ -62,8 +62,6 @@ api.interceptors.response.use(
         const status = error.response?.data?.status || '';
         message = error.response?.data?.message || message;
         showToastWithThrottle(status, message);
-        
-         window.location.href = "./auth/"+paths.auth.login.getHref();
       }
     
     

@@ -10,45 +10,46 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
-interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
-  name: string;
-  control: Control<any>;
+interface DatePickerProps {
+  value: Date | undefined
+  onChange: (date: Date) => void
+  label?: string
+  disabledDate?: (date: Date) => boolean
 }
 
-export function DatePicker({ name, control, className }: DatePickerProps) {
-  const { field } = useController({
-    name,
-    control,
-  });
-
-  const [date, setDate] = React.useState<Date | undefined>(field.value);
-
-  React.useEffect(() => {
-    field.onChange(date); // Update react-hook-form on date change
-  }, [date, field]);
-
+export function DatePicker({
+  value,
+  onChange,
+  label,
+  disabledDate,
+}: DatePickerProps) {
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn(
-            "w-[280px] justify-start text-left font-normal",
-            !date && "text-muted-foreground",
-            className
-          )}
-        >
-          <CalendarIcon />
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-        />
-      </PopoverContent>
-    </Popover>
-  );
+    <div className="flex flex-col">
+      {label && <label>{label}</label>}
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant={"outline"}
+            className="pl-3 text-left font-normal"
+          >
+            {value ? (
+              format(value, "PPP")
+            ) : (
+              <span>Pick a date</span>
+            )}
+            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar
+            mode="single"
+            selected={value}
+            onSelect={onChange}
+            disabled={disabledDate}
+            required
+          />
+        </PopoverContent>
+      </Popover>
+    </div>
+  )
 }
